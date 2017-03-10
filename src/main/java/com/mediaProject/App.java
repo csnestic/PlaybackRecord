@@ -9,9 +9,11 @@ import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Simple application that takes arguments from command line to
@@ -46,16 +48,55 @@ public class App {
 				System.out.println("Please specify a filename you wish to playback.");
 			} else if (args[0].equals("record")) {
 				record(fileName);
+			} else {
+				System.out.println("Unknown Operation.");
 			}
 		} else if (args.length == 2) {
 			if (args[0].equals("record")) {
 				record(args[1]);
 			} else if (args[0].equals("play")) {
-				// playback(fileName);
+				playback(args[1]);
+			} else {
+				System.out.println("Unknown Operation.");
 			}
+		}	else {
+			System.out.println("Unknown Operation.");
 		}
 		// Uncomment when testing functionality in eclipse.
 		//record(fileName);
+	}
+
+	/**
+	 * Find the file specified and play it back.
+	 *
+	 * @param fileName
+	 */
+	private static void playback(String fileName) {
+		// Get file and convert it to the appropriate clip format.
+		// This works for the audio clips recorded from this same application.
+		File file = new File(fileName);
+		try {
+			Clip clip = AudioSystem.getClip();
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip.open(audioInputStream);
+			// Ensures one playthrough of the clip before terminating.
+			clip.start();
+			while(!clip.isRunning()){
+				Thread.sleep(10);
+			}
+			while(clip.isRunning()){
+				Thread.sleep(10);
+			}
+			clip.close();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -82,10 +123,8 @@ public class App {
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE,
 					new File(fName + ".wav"));
 		} catch (IOException e) {
-			System.err.println("I/O SAVE EXCEPTION" + e);
-			System.exit(-2);
+			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -114,14 +153,13 @@ public class App {
 					out = new ByteArrayOutputStream();
 					try {
 						// 10 Second timer for recording.
-						// TODO: change to an escape or shutdown command.
 						long t = System.currentTimeMillis();
 						long timer = t+10000;
 						System.out.println("Recording (10 seconds)");
 						while (System.currentTimeMillis() < timer) {
-							int count = line.read(buffer, 0, buffer.length);
-							if (count > 0){
-								out.write(buffer, 0, count);
+							int counter = line.read(buffer, 0, buffer.length);
+							if (counter > 0){
+								out.write(buffer, 0, counter);
 							}
 						}
 						System.out.println("Recording Complete!");
@@ -130,18 +168,15 @@ public class App {
 						// Send the byte array to the save method.
 						saveCapture(fileName, tempIs, soundFormat);
 
-					}  catch (IOException f) {
-						System.err.println("I/O CAPTURE EXCEPTION" + f);
-						System.exit(-2);
+					}  catch (IOException e) {
+						e.printStackTrace();
 					}
 				}
 			};
 			Thread recordingThread = new Thread(runner);
 			recordingThread.start();
-
 		} catch (LineUnavailableException e) {
-			System.err.println("LINE CAPTURE EXCEPTION" + e);
-			System.exit(-1);
+			e.printStackTrace();
 		}
 
 	}
