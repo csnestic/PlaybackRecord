@@ -10,6 +10,4 @@ Values that work for [args] :
 
 record [optional: filename] - current version will record 10 seconds of audio and create a .wav file with the given filename or call the file recording.wav if no filename is provided.
 
-To be written: 
-
-play [filename] - a filename must be supplied, will playback the given wav file.
+play [required: filename] - a filename must be supplied, will playback the named wav file. If only a filename is given it will check the current directory folder for the file.
