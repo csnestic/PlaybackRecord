@@ -14,8 +14,13 @@ public class Playback {
 	 * Find the file specified and play it back.
 	 *
 	 * @param fileName
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 * @throws LineUnavailableException
+	 * @throws InterruptedException
 	 */
-	public static void playback(String fileName) {
+	public static void playback(String fileName) throws UnsupportedAudioFileException,
+	IOException, LineUnavailableException, InterruptedException {
 		// Get file and convert it to the appropriate clip format.
 		// This works for the audio clips recorded from this same application.
 		File file = new File(fileName);
@@ -34,12 +39,16 @@ public class Playback {
 			clip.close();
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
+			throw new LineUnavailableException();
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
+			throw new UnsupportedAudioFileException();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new IOException();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			throw new InterruptedException();
 		}
 	}
 }

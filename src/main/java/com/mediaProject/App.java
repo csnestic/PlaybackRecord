@@ -1,12 +1,16 @@
 package com.mediaProject;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /**
  * Simple application that takes arguments from command line to
  * play or record specified WAV files.
  *
  */
 public class App {
-
 
 	/**
 	 * Main method for running record or playback functionality.
@@ -15,8 +19,13 @@ public class App {
 	 * something was missing and close execution.
 	 *
 	 * @param args
+	 * @throws IOException
+	 * @throws UnsupportedAudioFileException
+	 * @throws InterruptedException
+	 * @throws LineUnavailableException
 	 */
-	public static void main( String[] args ) {
+	public static void main( String[] args ) throws IOException, UnsupportedAudioFileException,
+	LineUnavailableException, InterruptedException {
 		String fileName = "";
 		if (args.length == 0){
 			System.out.println("Please specify an operation.");
