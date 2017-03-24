@@ -14,22 +14,17 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 public class PlaybackTest {
 
+	/**
+	 * Temporary folder to test files.
+	 */
 	@Rule
 	public TemporaryFolder temporaryFolder = new TemporaryFolder();
-
-	@Before
-	public void setup() { }
-
-	@After
-	public void tearDown() { }
 
 	/**
 	 * Testing playback method with empty file. IOException should not occur.
@@ -70,12 +65,10 @@ public class PlaybackTest {
 		File temp;
 		try {
 			temp = temporaryFolder.newFile("testfile.txt");
-
 			PrintWriter writer = new PrintWriter(temp, "UTF-8");
 			writer.println("testtesttest");
 			writer.close();
 			Playback.playback(temp.getPath());
-			assertTrue(true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
