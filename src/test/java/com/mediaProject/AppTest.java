@@ -84,7 +84,7 @@ public class AppTest {
 	}
 
 	/**
-	 * Test system console output for three or more arguments.
+	 * Test system console output for four or more arguments.
 	 *
 	 * @throws InterruptedException
 	 * @throws LineUnavailableException

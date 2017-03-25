@@ -46,7 +46,7 @@ public class PlaybackTest {
 				new ByteArrayInputStream(buf), soundFormat ,
 				buf.length);
 		AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, temp);
-		Playback.playback(temp.getPath());
+		Playback.playback(temp.getPath(), null);
 		// Playback success
 		assertTrue(true);
 	}
@@ -68,7 +68,7 @@ public class PlaybackTest {
 			PrintWriter writer = new PrintWriter(temp, "UTF-8");
 			writer.println("testtesttest");
 			writer.close();
-			Playback.playback(temp.getPath());
+			Playback.playback(temp.getPath(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
