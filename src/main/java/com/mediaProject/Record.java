@@ -25,7 +25,7 @@ public class Record {
 	 * @param recordedAudio
 	 * @param soundFormat
 	 */
-	private static void saveCapture(String fileName, byte[] recordedAudio, AudioFormat soundFormat) {
+	public static void saveCapture(String fileName, byte[] recordedAudio, AudioFormat soundFormat) {
 		String fName = "";
 		if (fileName.equals("")) {
 			fName = "recording";
@@ -36,7 +36,7 @@ public class Record {
 		// File will be located in the directory the program was run in.
 		AudioInputStream audioInputStream = new AudioInputStream(
 				new ByteArrayInputStream(recordedAudio), soundFormat,
-				out.toByteArray().length);
+				recordedAudio.length);
 		try {
 			AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE,
 					new File(fName + ".wav"));
