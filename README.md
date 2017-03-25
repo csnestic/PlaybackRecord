@@ -6,6 +6,9 @@ run mvn package from the source folder, jar will be packaged in target folder.
 
 java -cp [path to packaged jar]\PlaybackRecord-1.1.jar com.mediaProject.App [args]
 
+Additionally the package can be run using mvn exec in the following way, provided your terminal is in the directory with the pom.xmls:
+mvn clean install exec:java -Dexec.args="[args]"
+
 Values that work for [args] :
 
 record (optional: filename) - current version will record 10 seconds of audio and create a .wav file with the given filename or call the file recording.wav if no filename is provided.
