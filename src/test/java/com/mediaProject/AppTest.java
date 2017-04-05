@@ -80,7 +80,7 @@ public class AppTest {
 	public void testUnknownSingleInput() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		final String[] test = {"dfsdf"};
 		App.main(test);
-		assertEquals("Unknown Operation.", consoleOut.toString().trim());
+		assertEquals("Unknown Operation. [1 argument]", consoleOut.toString().trim());
 	}
 
 	/**
@@ -110,6 +110,6 @@ public class AppTest {
 	public void testTwoInvalidInput() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		final String[] test = {"podcast", "test"};
 		App.main(test);
-		assertEquals("Unknown Operation.", consoleOut.toString().trim());
+		assertEquals("Unknown Operation. [2 arguments]", consoleOut.toString().trim());
 	}
 }

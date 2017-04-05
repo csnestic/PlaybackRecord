@@ -32,11 +32,6 @@
     	<version>1.6.0</version>
     	<configuration>
     		<mainClass>com.mediaProject.App</mainClass>
-    		<arguments>
-    			<argument>arg0</argument>
-    			<argument>arg1</argument> 
-    			<argument>arg2</argument>
-    		</arguments>
     	</configuration>
     </plugin>
    </plugins>

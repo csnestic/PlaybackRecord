@@ -38,7 +38,6 @@ public class App {
 		List<Info> recordInfo = new ArrayList<Info>();
 
 		// Sort devices by playback and capture types.
-		// TODO: fix VM to test again in linux.
 		for(int i = 0; i < mixerInfo.length; i++) {
 			if(mixerInfo[i].getDescription().contains("Playback")){
 				playbackInfo.add(mixerInfo[i]);
@@ -59,7 +58,7 @@ public class App {
 				// One argument record uses default filename and default recording device.
 				Record.record(fileName, recordInfo.get(0));
 			} else {
-				System.out.println("Unknown Operation.");
+				System.out.println("Unknown Operation. [1 argument]");
 			}
 		} else if (args.length == 2) {
 			// Two arguments, record or play using default audio devices.
@@ -68,7 +67,7 @@ public class App {
 			} else if (args[0].equals("play")) {
 				Playback.playback(args[1], null);
 			} else {
-				System.out.println("Unknown Operation.");
+				System.out.println("Unknown Operation. [2 arguments]");
 			}
 		} else if (args.length == 3) {
 			// Three arguments, check for record or play commands
@@ -88,7 +87,7 @@ public class App {
 					Playback.playback(args[1], playbackInfo.get(playback));
 				}
 			} else {
-				System.out.println("Unknown Operation.");
+				System.out.println("Unknown Operation. [3 arguments]");
 			}
 		} else {
 			System.out.println("Unknown Operation.");

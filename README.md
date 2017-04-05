@@ -6,8 +6,11 @@ run mvn package from the source folder, jar will be packaged in target folder.
 
 java -cp [path to packaged jar]\PlaybackRecord-1.1.jar com.mediaProject.App [args]
 
-Additionally the package can be run using mvn exec in the following way, provided your terminal is in the directory with the pom.xmls:
+Additionally the package can be run using mvn exec in two ways, provided your terminal is in the directory with the pom.xml:
+
 mvn clean install exec:java -Dexec.args="[args]"
+OR
+mvn clean install exec:exec -Dexec.executable="java" -Dexec.args="-classpath target/classes com.mediaProject.App [args]"
 
 Values that work for [args] :
 
