@@ -14,7 +14,9 @@ mvn clean install exec:exec -Dexec.executable="java" -Dexec.args="-classpath tar
 
 Values that work for [args] :
 
-record (optional: filename) - current version will record 10 seconds of audio and create a .wav file with the given filename or call the file recording.wav if no filename is provided.
+record (optional: filename) (optional: number to select recording device) (optional: length of recording in seconds) - current version will default record 10 seconds of audio and create a .wav file with the given filename or call the file recording.wav if no filename is provided.
+
+NOTE: Each previous argument become required in this current version. Meaning, if you wish to specify a recording length you are required to specify a string for the filename and an int (default should be 0) for the recording device.
 
 play (required: filename) (optional: number to select playback device) - a filename must be supplied, will playback the named wav file. If only a filename is given it will check the current directory folder for the file. 
 

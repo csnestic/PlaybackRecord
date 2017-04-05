@@ -56,14 +56,14 @@ public class App {
 				System.out.println("Please specify a filename you wish to playback.");
 			} else if (args[0].equals("record")) {
 				// One argument record uses default filename and default recording device.
-				Record.record(fileName, recordInfo.get(0));
+				Record.record(fileName, recordInfo.get(0), 10);
 			} else {
 				System.out.println("Unknown Operation. [1 argument]");
 			}
 		} else if (args.length == 2) {
 			// Two arguments, record or play using default audio devices.
 			if (args[0].equals("record")) {
-				Record.record(args[1], recordInfo.get(0));
+				Record.record(args[1], recordInfo.get(0), 10);
 			} else if (args[0].equals("play")) {
 				Playback.playback(args[1], null);
 			} else {
@@ -77,7 +77,7 @@ public class App {
 				if (record > recordInfo.size() || record < 0) {
 					System.out.println("The requested recording device does not exist.");
 				} else {
-					Record.record(args[1], recordInfo.get(record));
+					Record.record(args[1], recordInfo.get(record), 10);
 				}
 			} else if (args[0].equals("play")){
 				int playback = Integer.parseInt(args[2]);
@@ -89,6 +89,20 @@ public class App {
 			} else {
 				System.out.println("Unknown Operation. [3 arguments]");
 			}
+		} else if (args.length == 4) {
+			// Four Arguments for specifying recording length in seconds + recording device.
+			if(args[0].equals("record")){
+				int record = Integer.parseInt(args[2]);
+				int recordingLength = Integer.parseInt(args[3]);
+				if (record > recordInfo.size() || record < 0) {
+					System.out.println("The requested recording device does not exist.");
+				} else {
+					Record.record(args[1], recordInfo.get(record), recordingLength);
+				}
+			} else {
+				System.out.println("Unknown Operation. [4 arguments]");
+			}
+
 		} else {
 			System.out.println("Unknown Operation.");
 		}

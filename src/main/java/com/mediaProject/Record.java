@@ -51,7 +51,7 @@ public class Record {
 	 *
 	 * @param fileName
 	 */
-	public static void record(String fileName, Mixer.Info mixerInfo) {
+	public static void record(String fileName, Mixer.Info mixerInfo, int recordingLength) {
 		final AudioFormat soundFormat = new AudioFormat(Constants.sampleRate, Constants.sampleSize,
 				Constants.channels, Constants.signed, Constants.bigEndian);
 		// Create the line to begin recording and try/catch for errors.
@@ -74,8 +74,8 @@ public class Record {
 						try {
 							// 10 Second timer for recording.
 							long t = System.currentTimeMillis();
-							long timer = t+10000;
-							System.out.println("Recording (10 seconds)");
+							long timer = t+ (1000*recordingLength);
+							System.out.println("Recording (" + recordingLength + " seconds)");
 							while (System.currentTimeMillis() < timer) {
 								int counter = line.read(buffer, 0, buffer.length);
 								if (counter > 0){

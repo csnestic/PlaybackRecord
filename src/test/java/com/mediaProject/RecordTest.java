@@ -3,8 +3,12 @@ package com.mediaProject;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Mixer.Info;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,5 +33,24 @@ public class RecordTest {
 		File file = new File(temporaryFolder.getRoot() + "\\junittest.wav");
 		assertTrue(file.exists());
 	}
+
+	/**
+	 * Test Record functionality.
+	 */
+	@ Test
+	public void recordMethodTest() {
+		// Get all audio devices.
+		Info[] mixerInfo = AudioSystem.getMixerInfo();
+		List<Info> recordInfo = new ArrayList<Info>();
+
+		// Sort devices by playback and capture types.
+		for(int i = 0; i < mixerInfo.length; i++) {
+			if(mixerInfo[i].getDescription().contains("Capture")){
+				recordInfo.add(mixerInfo[i]);
+			}
+		}
+		Record.record("test", recordInfo.get(0), 1);
+	}
+
 
 }
