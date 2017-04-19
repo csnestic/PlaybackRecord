@@ -3,12 +3,8 @@ package com.mediaProject;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Mixer.Info;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,9 +30,9 @@ public class RecordTest {
 		assertTrue(file.exists());
 	}
 
-	/**
+	/*	*//**
 	 * Test Record functionality.
-	 */
+	 *//*
 	@ Test
 	public void recordMethodTest() {
 		// Get all audio devices.
@@ -51,6 +47,6 @@ public class RecordTest {
 		}
 		Record.record("test", recordInfo.get(0), 1);
 	}
-
+	  */
 
 }

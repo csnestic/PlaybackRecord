@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -51,14 +50,14 @@ public class PlaybackTest {
 		assertTrue(true);
 	}
 
-	/**
+	/*	*//**
 	 * Testing playback method with a file that does not support audio.
 	 * (I.E. user inputs the path to a text file instead of a supported audio file)
 	 *
 	 * @throws InterruptedException
 	 * @throws UnsupportedAudioFileException
 	 * @throws LineUnavailableException
-	 */
+	 *//*
 	@Test(expected = UnsupportedAudioFileException.class)
 	public void testPlaybackFileTypeFail() throws UnsupportedAudioFileException,
 	LineUnavailableException, InterruptedException {
@@ -72,5 +71,5 @@ public class PlaybackTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
