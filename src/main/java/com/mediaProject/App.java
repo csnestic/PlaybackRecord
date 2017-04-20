@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Mixer.Info;
+import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
@@ -37,12 +40,14 @@ public class App {
 		List<Info> playbackInfo = new ArrayList<Info>();
 		List<Info> recordInfo = new ArrayList<Info>();
 
+		Line.Info targetDataLineInfo = new Line.Info(TargetDataLine.class);
 		// Sort devices by playback and capture types.
 		for(int i = 0; i < mixerInfo.length; i++) {
-			if(mixerInfo[i].getDescription().contains("Playback")){
-				playbackInfo.add(mixerInfo[i]);
-			} else if(mixerInfo[i].getDescription().contains("Capture")){
+			Mixer currentMixer = AudioSystem.getMixer(mixerInfo[i]);
+			if(currentMixer.isLineSupported(targetDataLineInfo)) {
 				recordInfo.add(mixerInfo[i]);
+			} else {
+				playbackInfo.add(mixerInfo[i]);
 			}
 		}
 
