@@ -61,14 +61,14 @@ public class App {
 				System.out.println("Please specify a filename you wish to playback.");
 			} else if (args[0].equals("record")) {
 				// One argument record uses default filename and default recording device.
-				Record.record(fileName, recordInfo.get(0), 10);
+				Record.record(fileName, 10, recordInfo.get(0));
 			} else {
 				System.out.println("Unknown Operation. [1 argument]");
 			}
 		} else if (args.length == 2) {
 			// Two arguments, record or play using default audio devices.
 			if (args[0].equals("record")) {
-				Record.record(args[1], recordInfo.get(0), 10);
+				Record.record(args[1], 10, recordInfo.get(0));
 			} else if (args[0].equals("play")) {
 				Playback.playback(args[1], null);
 			} else {
@@ -78,11 +78,11 @@ public class App {
 			// Three arguments, check for record or play commands
 			// and check that the specified device exists.
 			if (args[0].equals("record")) {
-				int record = Integer.parseInt(args[2]);
-				if (record > recordInfo.size() || record < 0) {
-					System.out.println("The requested recording device does not exist.");
+				int recordingLength = Integer.parseInt(args[2]);
+				if (recordingLength <= 0) {
+					System.out.println("The recording length must be greater than 0");
 				} else {
-					Record.record(args[1], recordInfo.get(record), 10);
+					Record.record(args[1], recordingLength, recordInfo.get(0));
 				}
 			} else if (args[0].equals("play")){
 				int playback = Integer.parseInt(args[2]);
@@ -97,12 +97,14 @@ public class App {
 		} else if (args.length == 4) {
 			// Four Arguments for specifying recording length in seconds + recording device.
 			if(args[0].equals("record")){
-				int record = Integer.parseInt(args[2]);
-				int recordingLength = Integer.parseInt(args[3]);
+				int record = Integer.parseInt(args[3]);
+				int recordingLength = Integer.parseInt(args[2]);
 				if (record > recordInfo.size() || record < 0) {
 					System.out.println("The requested recording device does not exist.");
+				} else if (recordingLength <= 0) {
+					System.out.println("The recording length must be greater than 0");
 				} else {
-					Record.record(args[1], recordInfo.get(record), recordingLength);
+					Record.record(args[1], recordingLength, recordInfo.get(record));
 				}
 			} else {
 				System.out.println("Unknown Operation. [4 arguments]");

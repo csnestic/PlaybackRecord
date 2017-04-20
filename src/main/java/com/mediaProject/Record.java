@@ -51,7 +51,7 @@ public class Record {
 	 *
 	 * @param fileName
 	 */
-	public static void record(String fileName, Mixer.Info mixerInfo, int recordingLength) {
+	public static void record(String fileName, int recordingLength, Mixer.Info mixerInfo) {
 		final AudioFormat soundFormat = new AudioFormat(Constants.sampleRate, Constants.sampleSize,
 				Constants.channels, Constants.signed, Constants.bigEndian);
 		// Create the line to begin recording and try/catch for errors.
